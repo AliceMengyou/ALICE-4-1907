@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>九九乘法表</title>
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>九九乘法表</h1>
+        <ul v-bind:style="ulStyle">
+            <li v-for="item in 9" v-bind:style="liStyle">
+                <span v-for="n in item" v-bind:style="spanStyle">
+                    {{n}}*{{item}}={{n*item}}
+                </span>
+            </li>
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                ulStyle: {
+                    'width': '100%',
+                    'height': '100%',
+                    'padding': '0',
+                    'margin': '0'
+                },
+                liStyle: {
+                    'width': '100%',
+                    'height': '100%',
+                    "list-style": 'none',
+
+                },
+                spanStyle: {
+                    'width': '200px',
+                    'height': '20px',
+                    'border': '1px solid #000'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

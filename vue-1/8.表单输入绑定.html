@@ -11,50 +11,48 @@
 
 <body>
     <div id="app">
-        <!--  *两者选一*   -->
-        <!-- 男<input type="radio" value="a" v-model="value">
-        女<input type="radio" value="b" v-model="value"> -->
-
-        <!--  * 多选框 *-->
-        <!-- <input type="checkbox" :value="value" v-model="value"> -->
-
-        <select>
-            <option :value="item.name" v-for="item in user" v-model="item.name">
-                {{item.name}}
-            </option>
-        </select>
+        <div>
+            <h1>单选模式</h1>
+            <input type="checkbox" v-model="checked">
+            <p>{{checked}}</p>
+        </div>
+        <div>
+            <h1>多选模式</h1>
+            A<input type="checkbox" value="A" v-model="checks">
+            B<input type="checkbox" value="B" v-model="checks">
+            C<input type="checkbox" value="C" v-model="checks">
+            <P>{{checks}}</P>
+        </div>
+        <div>
+            <h1>radio</h1>
+            <span>
+                <label>女</label>
+                <input type="radio" value="女" v-model="radio">
+            </span>
+            <span>
+                <label>男</label>
+                <input type="radio" value="男" v-model="radio">
+            </span>
+            <p>{{radio}}</p>
+        </div>
+        <div>
+            <h1>range</h1>
+            <span>
+                <input type="range" v-model="range">
+                <p>{{range}}</p>
+            </span>
+        </div>
     </div>
     <script>
         const vm = new Vue({
             el: '#app',
-
             data: {
-                value: [],
+                checked: '',
                 status: 0,
-                user: [
-                    {
-                        name: '张三',
-                        age: 10,
-                        sex: '男'
-                    },
-                    {
-                        name: '李四',
-                        age: 20,
-                        sex: '女'
+                checks: [],
+                radio: '',
+                range: ''
 
-                    },
-                    {
-                        name: '张芳芳',
-                        age: 30,
-                        sex: '女'
-                    },
-                    {
-                        name: 'Jenny',
-                        age: 40,
-                        sex: '男'
-                    }
-
-                ]
             }
         })
     </script>

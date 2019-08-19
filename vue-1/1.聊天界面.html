@@ -9,23 +9,34 @@
     <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
 </head>
 <style>
+    .selected {
+        margin-right: 0;
+        float: right;
+    }
 
+    .spanSelected {
+        width: 200px;
+        height: 50px;
+        background: green;
+        border: 1px solid #000;
+        border-radius: 15px;
+    }
 </style>
 
 <body>
     <div id="demo">
-        <div class="user">
+        <div class="users">
             <button v-show="user" @click="user=!user">A</button>
             <button v-show="user===false" @click="user=!user">B</button>
         </div>
-        <ul>
-            <li v-for="(item,index) in messageLIst">
-                {{item}}
-                <button @click="del(item,index,$event)">撤回</button>
+        <ul v-bind:style="ulStyle">
+            <li v-for="(item,index) in messageLIst" v-bind:style="liStyle">
+                <span v-bind:style="spanStyle" v-bind:class="{selected:user,spanSelected:user}">{{item}}</span>
+                <button @click="del(item,index,$event)" v-bind:class="{selected:user}">撤回</button>
             </li>
         </ul>
-        <textarea v-model="text"></textarea>
-        <button @click="push()">发布消息</button>
+        <textarea v-model="text" @focus="input()"></textarea>
+        <button @click="push()">发送</button>
     </div>
 
     <script>
@@ -33,21 +44,52 @@
             el: '#demo',
             data: {
                 messageLIst: [],
-                text: 'I am v-model',
+                text: '说点什么吧',
                 user: true,
-                a: {
-                    'float': 'left'
+                ulStyle: {
+                    'margin': '0',
+                    'padding': '0',
+                    'width': '500px',
+                    'height': '300px',
+                    'background': 'red',
+                    'border': '1px solid #000',
+                    'borderRadius': '15px'
+
                 },
-                b: {
-                    'float': 'right'
+
+                liStyle: {
+                    'list-style': 'none',
+                    'width': '100%',
+                    'height': '50px',
+                    // 'float': 'left',
+
+                },
+                spanStyle: {
+                    'width': '200px',
+                    'height': '50px',
+                    'border': '1px solid #000',
+                    'borderRadius': '15px',
+                    'background': 'green',
                 }
             },
             methods: {
-                push() {
-                    this.messageLIst.push(this.text)
+                input() {
+                    this.text = ''
+
                 },
+                push() {
+                    if (this.text < 1) {
+                        alert('请输入内容')
+                    } else {
+                        this.messageLIst.push(this.text)
+                        this.text = ''
+                    }
+
+                },
+
                 del(val, i, e) {
-                    this.messageLIst.splice(i, 1)
+                    this.messageLIst.splice(i, 1);
+
                 },
 
 

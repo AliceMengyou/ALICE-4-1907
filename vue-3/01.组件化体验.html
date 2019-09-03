@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>组件化体验</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+    />
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./js/1.table.js"></script>
+    <script src="./js/i-btn.js"></script>
+  </head>
+
+  <body>
+    <!--
+        组件化
+        1. 复用方便
+        2. 维护方便
+        3. 不互相冲突 各自独立
+    -->
+    <div id="app"></div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          head: ['#', 'FirstName', 'LastName', 'Username'],
+        },
+        template: `
+        <div class='app'>
+          <Button slot="header" color="primary">你好</Button>
+          <Button slot="footer" color="success">我是</Button>
+          <Button color="info">成功</Button>
+          <i-table></i-table>
+          </div>
+        `,
+      });
+      /**
+       * 1.组件也有data 选项
+       * 2. 组件的模板只能写在template里面
+       */
+    </script>
+  </body>
+</html>

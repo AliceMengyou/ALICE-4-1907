@@ -46,13 +46,19 @@
     <div id="app">
         <div id="tab">
             <div id="header">
-                <div class="item" v-for="(item,index) in list" v-on:click="select(index)"
-                    v-bind:class="{active:showIndex===index}">
+                <div
+                 class="item"
+                 v-for="(item,index) in list"
+                 v-on:click="select(index)"
+                 v-bind:class="{active:showIndex===index}">
                     {{item.title}}
                 </div>
             </div>
             <div id="content">
-                <div class="item" v-for="(item,index) in list" v-show="showIndex===index">
+                <div
+                 class="item"
+                 v-for="(item,index) in list"
+                 v-show="showIndex===index">
                     {{item.content}}
                 </div>
             </div>

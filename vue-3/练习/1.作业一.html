@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>模板</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+    />
     <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="../js/1.table.js"></script>
   </head>
 
   <body>
@@ -14,6 +19,11 @@
       const vm = new Vue({
         el: '#app',
         data: {},
+        template: `
+        <div class='app'>
+            <Table ></Table>
+        </div>
+        `,
       });
     </script>
   </body>

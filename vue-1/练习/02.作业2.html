@@ -1,157 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>模板</title>
     <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
-<style>
+  </head>
+  <style>
     #chat {
-        width: 500px;
-        height: 600px;
-        border: 1px solid #000;
-        margin: 100px auto;
-        display: flex;
-        flex-direction: column;
+      width: 500px;
+      height: 600px;
+      border: 1px solid #000;
+      margin: 100px auto;
+      display: flex;
+      flex-direction: column;
     }
 
     .header {
-        width: inherit;
-        height: 50px;
-        border-bottom: 1px solid #000;
+      width: inherit;
+      height: 50px;
+      border-bottom: 1px solid #000;
     }
 
     .content {
-        width: inherit;
-        flex: 1;
-        padding: 10px 0px;
-        overflow: hidden;
+      width: inherit;
+      flex: 1;
+      padding: 10px 0px;
+      overflow: hidden;
     }
 
     .content .list .item {
-        width: inherit;
-        height: 30px;
-        display: flex;
-        padding: 0 10px;
-
+      width: inherit;
+      height: 30px;
+      display: flex;
+      padding: 0 10px;
     }
 
     .content .list .self {
-        justify-content: flex-end;
+      justify-content: flex-end;
     }
 
     .content .list .item span {
-        border: 1px solid #000;
-        border-radius: 5px;
-        font-size: 12px;
-        padding: 3px 5px;
+      border: 1px solid #000;
+      border-radius: 5px;
+      font-size: 12px;
+      padding: 3px 5px;
     }
 
     .footer {
-        width: inherit;
-        height: 50px;
-        border-top: 1px solid #000;
-        position: relative;
-        display: flex;
-        align-items: center;
+      width: inherit;
+      height: 50px;
+      border-top: 1px solid #000;
+      position: relative;
+      display: flex;
+      align-items: center;
     }
 
     .footer input {
-        width: 350px;
-        height: 30px;
-        margin-left: 50px;
-        border: 1px solid #cccccc;
-        border-radius: 15px;
-        outline: none;
-        text-align: center;
+      width: 350px;
+      height: 30px;
+      margin-left: 50px;
+      border: 1px solid #cccccc;
+      border-radius: 15px;
+      outline: none;
+      text-align: center;
     }
 
     .footer .btn {
-        position: absolute;
-        right: 20px;
-        bottom: 15px;
-        display: flex;
-
+      position: absolute;
+      right: 20px;
+      bottom: 15px;
+      display: flex;
     }
-</style>
+  </style>
 
-<body>
+  <body>
     <div id="app">
-        <div id="chat">
-            <div class="header">
+      <div id="chat">
+        <div class="header"></div>
+        <div class="content">
+          <div class="list">
+            <div
+              v-for="item in users"
+              v-bind:class="['item',{self:(id===item.id)}]"
+            >
+              <div>
+                <b>
+                  {{ item.name }}
+                  <b>
+                    :
+                  </b>
+                </b>
+                <span>
+                  {{ item.value }}
+                </span>
+              </div>
             </div>
-            <div class="content">
-                <div class="list">
-                    <div v-for="item in users" v-bind:class="['item',{self:(id===item.id)}]">
-                        <div>
-                            <b>
-                                {{item.name}}
-                                <b>
-                                    :
-                                </b>
-                            </b>
-                            <span>
-                                {{item.value}}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <input type="text" v-model="text">
-                <div class="btn">
-                    <button @click="send()">send</button>
-                </div>
-            </div>
+          </div>
         </div>
+        <div class="footer">
+          <input type="text" v-model="text" v-on:keydown.enter="send" />
+          <div class="btn">
+            <button @click="send()">send</button>
+          </div>
+        </div>
+      </div>
     </div>
     <script>
-        const vm = new Vue({
-            el: '#app',
-            data: {
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          id: '1',
+          text: '',
+          users: [
+            {
+              id: '1',
+              name: '木子耳',
+              value: '你好 杀生丸',
+            },
+            {
+              id: '2',
+              name: '杀生丸',
+              value: '你好 木子耳',
+            },
+          ],
+        },
+        methods: {
+          send() {
+            if (this.text === '') {
+              alert('请输入内容');
+            } else {
+              this.users.push({
                 id: '1',
-                text: '',
-                users: [
-                    {
-                        id: '1',
-                        name: '木子耳',
-                        value: '你好 杀生丸'
-                    },
-                    {
-                        id: '2',
-                        name: '杀生丸',
-                        value: '你好 木子耳'
-                    }
-                ]
-            },
-            methods: {
-                send() {
-                    if (this.text === '') {
-                        alert('请输入内容')
-                    } else {
-                        this.users.push({
-                            id: '1',
-                            name: '木子耳',
-                            value: this.text
-                        })
-                        setTimeout(() => {
-
-                            this.users.push({
-                                id: Math.ceil(Math.random() * 100),
-                                name: '杀生丸' + Math.ceil(Math.random() * 100),
-                                value: '你好'
-                            })
-                        }, 30)
-                        this.text = ''
-                    }
-
-                }
-            },
-        })
+                name: '木子耳',
+                value: this.text,
+              });
+              setTimeout(() => {
+                this.users.push({
+                  id: Math.ceil(Math.random() * 100),
+                  name: '杀生丸' + Math.ceil(Math.random() * 100),
+                  value: '你好',
+                });
+              }, 30);
+              this.text = '';
+            }
+          },
+        },
+      });
     </script>
-</body>
-
+  </body>
 </html>

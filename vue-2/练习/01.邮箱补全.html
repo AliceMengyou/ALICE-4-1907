@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>下拉列表制作</title>
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <style>
+    .email {
+      width: 500px;
+      height: 300px;
+      border: 1px solid #000;
+      margin: 100px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .email input {
+      width: 200px;
+      height: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 15px;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      outline: none;
+      font-style: italic;
+    }
+
+    .email .list {
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      border-bottom: 0;
+      width: 200px;
+      box-sizing: border-box;
+      margin-top: 5px;
+      overflow: hidden;
+    }
+
+    .email .list .options {
+      border-bottom: 1px solid #ccc;
+      cursor: pointer;
+    }
+    /* .email .list .options:hover {
+      background: lightSkyBlue;
+    } */
+    .email .list .options.active {
+      background: lightSkyBlue;
+    }
+  </style>
+
+  <body>
+    <div id="app">
+      <div class="email">
+        <!--
+        输入框
+          -->
+
+        <h1>
+          email
+        </h1>
+        <input
+          type="text"
+          name="email"
+          v-on:keydown.up.prevent="up"
+          v-on:keydown.down.prevent="down"
+          v-on:keydown.enter="enter"
+          v-model="value"
+        />
+        <!--
+          显示列表
+        -->
+        <div class="list" v-if="emailList.length>0">
+          <div
+            v-on:mouseenter="mouseenter(index)"
+            v-on:mouseleave="mouseleave(index)"
+            v-on:mouseover="mouseover"
+            v-on:click="click(item)"
+            v-for="(item,index) in emailList"
+            v-bind:class="{
+                    options:true,
+                    active:selectIndex === index
+                }"
+          >
+            {{ item }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const vm = new Vue({
+        // 被挂载的元素
+        el: '#app',
+        // 数据
+        data: {
+          value: '',
+          selectIndex: -1,
+        },
+        // 计算属性
+        computed: {
+          emailList() {
+            // 如果输入为空返回一个空数组
+            if (!this.value) return [];
+            // 是否符合邮箱格式判断
+            if (/\w+v-on/.test(this.value)) return [];
+            return [
+              this.value + 'v-onqq.com',
+              this.value + 'v-on163.com',
+              this.value + 'v-onhotmail.com',
+              this.value + 'v-ontom.com',
+              this.value + 'v-on139.com',
+              this.value + 'v-on188.com',
+            ];
+          },
+        },
+        // 方法
+        methods: {
+          // 向下
+          down() {
+            if (typeof this.selectIndex === 'number') {
+              this.selectIndex++;
+            }
+            // 临界值判断:当移动至最后一行的时候，停止向下
+            if (this.selectIndex >= this.emailList.length - 1) {
+              this.selectIndex = this.emailList.length - 1;
+            }
+          },
+          // 向上
+          up() {
+            if (typeof this.selectIndex === 'number') {
+              this.selectIndex--;
+            }
+            // 临界值:当移动至第一行的时候，停止继续向上
+            if (this.selectIndex < 0) {
+              this.selectIndex = 0;
+            }
+          },
+          // 回车事件
+          enter() {
+            if (isNaN(this.selectIndex)) return;
+            // 当没有进行选择的时候  默认选中第一个
+            if (this.selectIndex < 0) {
+              this.selectIndex = 0;
+              this.value === this.emailList[this.selectIndex];
+            }
+            //根据选项的下表选择相应的内容输入
+            this.value = this.emailList[this.selectIndex];
+          },
+          // 手动点击某项
+          click(i) {
+            this.value = i;
+          },
+          // 当鼠标在选项上进行移动的时候，键盘向下或者向上的选中背景消失
+          mouseover() {
+            this.selectIndex = -1;
+          },
+          // 当鼠标移入的时候  背景会跟随所指项发生变化
+          mouseenter(i) {
+            this.selectIndex = i;
+          },
+          mouseleave(i) {
+            this.selectIndex == !i;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

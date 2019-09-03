@@ -6,14 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>模板</title>
     <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./js/Card.js"></script>
   </head>
 
   <body>
     <div id="app"></div>
     <script>
+      /**
+       * 局部组件总结：是通过实例的components 选项注册的，局部组件是一个为生成的实例，只用在用到的时候才会注册使用
+       */
       const vm = new Vue({
         el: '#app',
-        data: {},
+        components: {
+          //key 使用将要注册的局部组件名称
+          iii: Card,
+        },
+        template: `
+        <iii type="A"></iii>
+        `,
       });
     </script>
   </body>

@@ -21,8 +21,10 @@
 <body>
     <div id="app">
         <ul class="list">
-            <li v-for="(item,index) in liList" v-on:click="addClass(index)" v-bind:class="{ 
-         isCheck:index==current}">
+            <li 
+                v-for="(item,index) in liList"
+                v-on:click="addClass(index)"
+                v-bind:class="{isCheck:index==current}">
                 {{item.title}}</li>
         </ul>
     </div>

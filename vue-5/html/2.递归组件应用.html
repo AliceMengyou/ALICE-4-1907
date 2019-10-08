@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>模板</title>
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="../js/递归组件.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          list: [
+            {
+              name: '张三',
+              isShowChildren: false,
+              children: [
+                {
+                  name: '小小张',
+                  isShowChildren: false,
+                  children: [
+                    {
+                      name: '张小小',
+                      isShowChildren: false,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              name: '李四',
+              isShowChildren: false,
+              children: [
+                {
+                  name: '小小李',
+                  isShowChildren: false,
+                  children: [
+                    {
+                      name: '李小小',
+                      isShowChildren: false,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              name: '王五',
+              isShowChildren: false,
+              children: [
+                {
+                  name: '小小王',
+                  isShowChildren: false,
+                  children: [
+                    {
+                      name: '王小小',
+                      isShowChildren: false,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        template: `
+        <div id='app'>
+            <Tree :data='list'/>
+        </div>
+        `,
+      });
+    </script>
+  </body>
+</html>

@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>局部组件传参</title>
+    <title>模板</title>
     <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="./js/Input.js"></script>
+    <script src="./components/Icon.js"></script>
+    <link rel="stylesheet" href="./fonts/iconfont.css" />
   </head>
 
   <body>
@@ -14,14 +15,12 @@
     <script>
       const vm = new Vue({
         el: '#app',
+        data: {},
         template: `
-        <div class="app">
-            <Input placeholder="xxx"/>
-        </div>
+        <div id='app'>
+            <Icon />
+          </div>
         `,
-        components: {
-          Input: input,
-        },
       });
     </script>
   </body>

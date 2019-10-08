@@ -1,5 +1,7 @@
 Vue.component('Table', {
-  props: [],
+  props: {
+    striped: Boolean,
+  },
   data() {
     return {
       column: [
